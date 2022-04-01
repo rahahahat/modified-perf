@@ -1,0 +1,8 @@
+{
+  "files.associations": {
+    "sparse_": "c",
+    "sparse": "c",
+    "test4": "cpp",
+    "cusparse_super_clean": "cpp"
+  }
+}
