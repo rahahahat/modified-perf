@@ -1,0 +1,9 @@
+{
+  "files.associations": {
+    "test2": "c",
+    "preloadlib.h": "c",
+    "test4": "cpp",
+    "sparse_": "c",
+    "cusparse": "cpp"
+  }
+}
