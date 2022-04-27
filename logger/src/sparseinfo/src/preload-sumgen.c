@@ -30,6 +30,7 @@ cusparseStatus_t cusparseGetVersion(cusparseHandle_t handle, int* version)
 	armpl_logging_leave(&logger);
 	return returnVal;
 }
+
 cusparseStatus_t cusparseCreateMatDescr(cusparseMatDescr_t* descrA)
 {
 	cusparseStatus_t returnVal;
@@ -4327,7 +4328,7 @@ cusparseStatus_t cusparseCreateCsr(cusparseSpMatDescr_t* spMatDescr, int64_t row
 	armpl_logging_enter(&logger, "cusparseCreateCsr", 0, 1, 0, 0);
 	cusparseStatus_t (*real_cusparseCreateCsr)(cusparseSpMatDescr_t* spMatDescr, int64_t rows, int64_t cols, int64_t nnz, void* csrRowOffsets, void* csrColInd, void* csrValues, cusparseIndexType_t csrRowOffsetsType, cusparseIndexType_t csrColIndType, cusparseIndexBase_t idxBase, cudaDataType valueType) = dlsym(RTLD_NEXT, "cusparseCreateCsr");
 	returnVal = real_cusparseCreateCsr( spMatDescr, rows, cols, nnz, csrRowOffsets, csrColInd, csrValues, csrRowOffsetsType, csrColIndType, idxBase, valueType);
-	armpl_logging_leave(&logger, nnz);
+	armpl_logging_leave(&logger, rows);
 	return returnVal;
 }
 cusparseStatus_t cusparseCreateCsc(cusparseSpMatDescr_t* spMatDescr, int64_t rows, int64_t cols, int64_t nnz, void* cscColOffsets, void* cscRowInd, void* cscValues, cusparseIndexType_t cscColOffsetsType, cusparseIndexType_t cscRowIndType, cusparseIndexBase_t idxBase, cudaDataType valueType)
@@ -4570,16 +4571,6 @@ cusparseStatus_t cusparseSparseToDense_bufferSize(cusparseHandle_t handle, cuspa
 	armpl_logging_leave(&logger);
 	return returnVal;
 }
-cusparseStatus_t cusparseSparseToDense(cusparseHandle_t handle, cusparseSpMatDescr_t matA, cusparseDnMatDescr_t matB, cusparseSparseToDenseAlg_t alg, void* externalBuffer)
-{
-	cusparseStatus_t returnVal;
-	armpl_logging_struct logger;
-	armpl_logging_enter(&logger, "cusparseSparseToDense", 0, 0, 0, 0);
-	cusparseStatus_t (*real_cusparseSparseToDense)(cusparseHandle_t handle, cusparseSpMatDescr_t matA, cusparseDnMatDescr_t matB, cusparseSparseToDenseAlg_t alg, void* externalBuffer) = dlsym(RTLD_NEXT, "cusparseSparseToDense");
-	returnVal = real_cusparseSparseToDense( handle, matA, matB, alg, externalBuffer);
-	armpl_logging_leave(&logger);
-	return returnVal;
-}
 cusparseStatus_t cusparseDenseToSparse_bufferSize(cusparseHandle_t handle, cusparseDnMatDescr_t matA, cusparseSpMatDescr_t matB, cusparseDenseToSparseAlg_t alg, size_t* bufferSize)
 {
 	cusparseStatus_t returnVal;
@@ -4755,7 +4746,7 @@ cusparseStatus_t cusparseSpMM(cusparseHandle_t handle, cusparseOperation_t opA, 
 	cusparseStatus_t returnVal;
 	armpl_logging_struct logger;
 	armpl_logging_enter(&logger, "cusparseSpMM", 0, 0, 0, 0);
-	cusparseStatus_t (*real_cusparseSpMM)(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseSpMatDescr_t matA, cusparseDnMatDescr_t matB, const void* beta, cusparseDnMatDescr_t matC, cudaDataType computeType, cusparseSpMMAlg_t alg, void* externalBuffer) = dlsym(RTLD_NEXT, "cusparseSpMM");
+	cusparseStatus_t (*real_cusparseSpMM)(cusparseHandle_t handle, cusparseOperation_t opA, cusparseOperation_t opB, const void* alpha, cusparseSpMatDescr_t matA, cusparseDnMatDescr_t matB, const void* beta, cusparseDnMatDescr_t matC, cudaDataType computeType,cusparseSpMMAlg_t alg, void* externalBuffer) = dlsym(RTLD_NEXT, "cusparseSpMM");
 	returnVal = real_cusparseSpMM( handle, opA, opB, alpha, matA, matB, beta, matC, computeType, alg, externalBuffer);
 	armpl_logging_leave(&logger);
 	return returnVal;

@@ -4570,7 +4570,6 @@ cusparseStatus_t cusparseSparseToDense_bufferSize(cusparseHandle_t handle, cuspa
 	armpl_logging_leave(&logger);
 	return returnVal;
 }
-
 cusparseStatus_t cusparseSparseToDense(cusparseHandle_t handle, cusparseSpMatDescr_t matA, cusparseDnMatDescr_t matB, cusparseSparseToDenseAlg_t alg, void* externalBuffer)
 {
 	cusparseStatus_t returnVal;
@@ -4581,7 +4580,6 @@ cusparseStatus_t cusparseSparseToDense(cusparseHandle_t handle, cusparseSpMatDes
 	armpl_logging_leave(&logger);
 	return returnVal;
 }
-
 cusparseStatus_t cusparseDenseToSparse_bufferSize(cusparseHandle_t handle, cusparseDnMatDescr_t matA, cusparseSpMatDescr_t matB, cusparseDenseToSparseAlg_t alg, size_t* bufferSize)
 {
 	cusparseStatus_t returnVal;
